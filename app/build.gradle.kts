@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.nanohttpd)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.androidx.appcompat)
 
 
     testImplementation(libs.junit)

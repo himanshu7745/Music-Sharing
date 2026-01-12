@@ -2,8 +2,9 @@ package com.example.musicsharing.data.repository
 
 import android.content.Context
 import android.util.Log
-import com.example.musicsharing.utils.MusicServerInfo
-import com.example.musicsharing.udp.UdpDiscoveryManager
+import com.example.musicsharing.core.model.MusicServerInfo
+import com.example.musicsharing.domain.network.discovery.UdpDiscoveryManager
+import com.example.musicsharing.core.constant.NetworkConstants
 
 class AudioReceiveRepository(private val context: Context) {
 
@@ -12,11 +13,10 @@ class AudioReceiveRepository(private val context: Context) {
     }
 
     private val discoveryManager = UdpDiscoveryManager()
-    private val streamRepository = AudioStreamRepository(context)
 
     fun startDiscovery(
         onServerFound: (MusicServerInfo) -> Unit,
-        discoveryDuration: Long = 10_000L
+        discoveryDuration: Long = NetworkConstants.DISCOVERY_DURATION_MS
     ) {
         Log.d(TAG, "Starting server discovery")
         discoveryManager.startDiscovery(
@@ -30,7 +30,4 @@ class AudioReceiveRepository(private val context: Context) {
         discoveryManager.stopDiscovery()
     }
 
-    fun getStreamRepository(): AudioStreamRepository {
-        return streamRepository
-    }
 }
